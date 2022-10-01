@@ -4,7 +4,7 @@ from collections import OrderedDict
 import data
 from options.test_options import TestOptions
 from models.pix2pix_model import Pix2PixModel
-from util.visualizer import Visualizer
+from util.old_visualizer import Visualizer
 from util import html
 from tqdm import tqdm
 

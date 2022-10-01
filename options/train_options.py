@@ -13,6 +13,13 @@ class TrainOptions(BaseOptions):
         parser.add_argument('--debug', action='store_true', help='only do one epoch and displays at each iteration')
         parser.add_argument('--tf_log', action='store_true', help='if specified, use tensorboard logging. Requires tensorflow installed')
 
+        parser.add_argument('--display_ncols', type=int, default=4, help='if positive, display all images in a single visdom web panel with certain number of images per row.')
+        parser.add_argument('--display_id', type=int, default=None, help='window id of the web display. Default is random window id')
+        parser.add_argument('--display_server', type=str, default="http://izar", help='visdom server of the web display')
+        parser.add_argument('--display_env', type=str, default='TSIT', help='visdom display environment name (default is "main")')
+        parser.add_argument('--display_port', type=int, default=8097, help='visdom port of the web display')
+        parser.add_argument('--update_html_freq', type=int, default=1000, help='frequency of saving training results to html')
+        
         # for training
         parser.add_argument('--continue_train', action='store_true', help='continue training: load the latest model')
         parser.add_argument('--which_epoch', type=str, default='latest', help='which epoch to load? set to latest to use latest cached model')
