@@ -16,7 +16,7 @@ datasets/bdd100k
 datasets/photo2art
 datasets/Cityscapes
 datasets/ADEChallengeData2016
-models/networks/sync_batchnorm
+# models/networks/sync_batchnorm
 results*
 srun_scripts
 
