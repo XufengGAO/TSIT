@@ -1,0 +1,43 @@
+#!/bin/bash
+
+#SBATCH --cpus-per-task=20
+#SBATCH --job-name=TSIT_vae_0_8
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=2
+#SBATCH --partition=gpu
+#SBATCH --gpus-per-node=2
+#SBATCH --qos=gpu_free
+#SBATCH --mem=350GB
+#SBATCH --time=12:00:00
+#SBATCH --chdir /scratch/izar/xugao/trainLogs
+#SBATCH --output=/scratch/izar/xugao/trainLogs/TSIT/train_vae_0_8_2_%j.out
+#SBATCH --error=/scratch/izar/xugao/trainLogs/TSIT/train_vae_0_8_2_%j.err
+
+module load gcc cuda
+echo "hello from 'hostname'"
+
+source /home/xugao/venvs/venv-for-demo/bin/activate
+cd /home/xugao/gitRepo/TSIT
+python train.py \
+--name 'train_vae_0_8' \
+--display_env 'vae_0_8' \
+--task 'AST' \
+--gpu_ids 0 \
+--batchSize 1 \
+--dataset_mode 'night2day' \
+--croot '/home/xugao/gitRepo/swapping-autoencoder-pytorch/datasets/nightVisionDatasets' \
+--sroot '/home/xugao/gitRepo/swapping-autoencoder-pytorch/datasets/nightVisionDatasets' \
+--nThreads 4 \
+--no_pairing_check \
+--no_instance \
+--gan_mode hinge \
+--display_freq 200 \
+--save_epoch_freq 5 \
+--niter 100 \
+--alpha 1.0 \
+--lambda_vgg 2 \
+--lambda_feat 1 \
+--use_vae \
+--dayJson "/home/xugao/gitRepo/swapping-autoencoder-pytorch/datasets/nightVisionDatasets/day_images.json"
+
+echo "bye from 'hostname'"
